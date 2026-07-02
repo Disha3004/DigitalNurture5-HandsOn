@@ -1,4 +1,4 @@
-package testing.src.main.java.com.example;
+package com.example;
 
 /**
  * Hello world!

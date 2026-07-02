@@ -1,4 +1,4 @@
-package testing.src.test.java.com.example.mockito;
+package com.example.mockito;
 
 
 import org.junit.jupiter.api.Test;

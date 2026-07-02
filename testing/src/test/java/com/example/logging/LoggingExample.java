@@ -1,4 +1,4 @@
-package testing.src.test.java.com.example.logging;
+package com.example.logging;
 
 
 import org.slf4j.Logger;

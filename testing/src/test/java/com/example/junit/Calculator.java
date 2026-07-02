@@ -1,4 +1,4 @@
-package testing.src.test.java.com.example.junit;
+package com.example.junit;
 
 
 

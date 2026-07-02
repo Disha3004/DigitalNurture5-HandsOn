@@ -1,4 +1,4 @@
-package testing.src.test.java.com.example.mockito;
+package com.example.mockito;
 
 
 public interface ExternalApi {

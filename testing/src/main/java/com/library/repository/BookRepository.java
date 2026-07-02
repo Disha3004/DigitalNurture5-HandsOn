@@ -1,4 +1,4 @@
-package testing.src.main.java.com.library.repository;
+package com.library.repository;
 
 public class BookRepository {
 

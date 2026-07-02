@@ -1,6 +1,6 @@
-package testing.src.main.java.com.library.service;
+package com.library.service;
 
-import testing.src.main.java.com.library.repository.BookRepository;
+import com.library.repository.BookRepository;
 
 public class BookService {
 
