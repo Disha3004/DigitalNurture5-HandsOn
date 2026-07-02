@@ -1,7 +1,7 @@
 package testing.src.main.java.com.library;
 
-import com.library.repository.BookRepository;
-import com.library.service.BookService;
+import testing.src.main.java.com.library.repository.BookRepository;
+import testing.src.main.java.com.library.service.BookService;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
