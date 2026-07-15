@@ -1,0 +1,26 @@
+Project Notes for Student Course Portal
+====================================
+
+1. angular.json
+Purpose: The Angular workspace configuration file. It defines the project name, build targets, serve options, and output paths for development and production builds.
+
+2. package.json
+Purpose: The npm manifest for the project. It lists dependencies, scripts such as ng serve and ng build, and the package manager version used by the workspace.
+
+3. tsconfig.json
+Purpose: The base TypeScript configuration for the workspace. It defines compiler options shared across the Angular project, such as target, module settings, and strictness.
+
+4. tsconfig.app.json
+Purpose: The TypeScript configuration specifically for the application code. It extends the base config and includes files that belong to the browser application build.
+
+5. src/main.ts
+Purpose: The application bootstrap file. It starts the Angular app by calling bootstrapApplication and passing the root component and app configuration.
+
+6. src/index.html
+Purpose: The single HTML entry page for the Angular application. It contains the root container where the Angular app is mounted during runtime.
+
+7. app.component.ts
+Purpose: The root component class for the Angular application. In this standalone Angular setup, the equivalent root component logic is defined in src/app/app.ts.
+
+8. app.config.ts (Angular standalone)
+Purpose: Provides the standalone application configuration. It registers global providers such as routing through provideRouter and browser error listeners.

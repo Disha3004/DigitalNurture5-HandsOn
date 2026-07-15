@@ -1,0 +1,11 @@
+<section class="page-card">
+  <h2>Course List</h2>
+  <ul class="course-list">
+    @for (course of courses; track course.title) {
+      <li>
+        <strong>{{ course.title }}</strong>
+        <span>Instructor: {{ course.instructor }}</span>
+      </li>
+    }
+  </ul>
+</section>
