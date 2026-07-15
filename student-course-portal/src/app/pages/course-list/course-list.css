@@ -1,5 +1,5 @@
 .page-card {
-  max-width: 900px;
+  max-width: 1100px;
   margin: 2rem auto;
   padding: 2rem;
   border-radius: 1rem;
@@ -7,18 +7,71 @@
   box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
 }
 
-.course-list {
-  list-style: none;
-  padding: 0;
-  display: grid;
+.filters {
+  display: flex;
+  flex-wrap: wrap;
   gap: 1rem;
+  margin: 1rem 0;
 }
 
-.course-list li {
+.filters input,
+.filters select {
+  padding: 0.7rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 0.5rem;
+}
+
+.checkbox-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.summary {
+  display: flex;
+  gap: 1rem;
+  color: #475569;
+  font-weight: 600;
+}
+
+.course-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.course-card {
+  padding: 1rem;
+  border-radius: 0.75rem;
+  border: 1px solid #e2e8f0;
+}
+
+.course-card.available {
+  background: #ecfdf3;
+}
+
+.course-card.unavailable {
+  background: #f3f4f6;
+}
+
+.card-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem;
-  border: 1px solid #e2e8f0;
-  border-radius: 0.75rem;
+  gap: 0.5rem;
 }
+
+.status {
+  font-weight: 700;
+  margin-top: 0.75rem;
+}
+
+.available-text {
+  color: green;
+}
+
+.closed-text {
+  color: red;
+}
+
