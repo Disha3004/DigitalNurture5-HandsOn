@@ -1,0 +1,166 @@
+<section class="form-card">
+  <h2>Student Registration</h2>
+
+  <form #studentForm="ngForm" (ngSubmit)="onSubmit(studentForm)" novalidate>
+    <div class="form-group">
+      <label for="fullName">Full Name</label>
+      <input
+        id="fullName"
+        name="fullName"
+        type="text"
+        [(ngModel)]="student.fullName"
+        required
+        minlength="3"
+        #fullName="ngModel"
+        [ngClass]="{ 'is-valid': fullName.valid && fullName.touched, 'is-invalid': fullName.invalid && fullName.touched }"
+      />
+      @if (fullName.errors?.['required'] && fullName.touched) {
+        <p class="error">Name is required.</p>
+      }
+      @if (fullName.errors?.['minlength'] && fullName.touched) {
+        <p class="error">Minimum 3 characters.</p>
+      }
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input
+        id="email"
+        name="email"
+        type="email"
+        [(ngModel)]="student.email"
+        required
+        email
+        #email="ngModel"
+        [ngClass]="{ 'is-valid': email.valid && email.touched, 'is-invalid': email.invalid && email.touched }"
+      />
+      @if (email.errors?.['required'] && email.touched) {
+        <p class="error">Email is required.</p>
+      }
+      @if (email.errors?.['email'] && email.touched) {
+        <p class="error">Enter a valid email.</p>
+      }
+    </div>
+
+    <div class="form-group">
+      <label for="mobile">Mobile Number</label>
+      <input
+        id="mobile"
+        name="mobile"
+        type="text"
+        [(ngModel)]="student.mobile"
+        required
+        pattern="^\d{10}$"
+        #mobile="ngModel"
+        [ngClass]="{ 'is-valid': mobile.valid && mobile.touched, 'is-invalid': mobile.invalid && mobile.touched }"
+      />
+      @if (mobile.errors?.['required'] && mobile.touched) {
+        <p class="error">Mobile number is required.</p>
+      }
+      @if (mobile.errors?.['pattern'] && mobile.touched) {
+        <p class="error">Mobile number must contain exactly 10 digits.</p>
+      }
+    </div>
+
+    <div class="form-group">
+      <label for="age">Age</label>
+      <input
+        id="age"
+        name="age"
+        type="number"
+        [(ngModel)]="student.age"
+        required
+        min="18"
+        max="60"
+        #age="ngModel"
+        [ngClass]="{ 'is-valid': age.valid && age.touched, 'is-invalid': age.invalid && age.touched }"
+      />
+      @if (age.errors?.['required'] && age.touched) {
+        <p class="error">Age is required.</p>
+      }
+      @if ((age.errors?.['min'] || age.errors?.['max']) && age.touched) {
+        <p class="error">Age must be between 18 and 60.</p>
+      }
+    </div>
+
+    <div class="form-group">
+      <label>Gender</label>
+      <div class="radio-group">
+        <label><input type="radio" name="gender" value="Male" [(ngModel)]="student.gender" required /> Male</label>
+        <label><input type="radio" name="gender" value="Female" [(ngModel)]="student.gender" required /> Female</label>
+        <label><input type="radio" name="gender" value="Other" [(ngModel)]="student.gender" required /> Other</label>
+      </div>
+      @if (!student.gender && studentForm.submitted) {
+        <p class="error">Please select a gender.</p>
+      }
+    </div>
+
+    <div class="form-group">
+      <label for="course">Course</label>
+      <select
+        id="course"
+        name="course"
+        [(ngModel)]="student.course"
+        required
+        #course="ngModel"
+        [ngClass]="{ 'is-valid': course.valid && course.touched, 'is-invalid': course.invalid && course.touched }"
+      >
+        <option value="">Select a course</option>
+        <option value="Angular">Angular</option>
+        <option value="React">React</option>
+        <option value="Spring Boot">Spring Boot</option>
+        <option value="Java">Java</option>
+      </select>
+      @if (course.errors?.['required'] && course.touched) {
+        <p class="error">Please select a course.</p>
+      }
+    </div>
+
+    <div class="form-group">
+      <label for="address">Address</label>
+      <textarea
+        id="address"
+        name="address"
+        [(ngModel)]="student.address"
+        required
+        minlength="10"
+        #address="ngModel"
+        [ngClass]="{ 'is-valid': address.valid && address.touched, 'is-invalid': address.invalid && address.touched }"
+      ></textarea>
+      @if (address.errors?.['required'] && address.touched) {
+        <p class="error">Address is required.</p>
+      }
+      @if (address.errors?.['minlength'] && address.touched) {
+        <p class="error">Address must be at least 10 characters.</p>
+      }
+    </div>
+
+    <div class="form-group checkbox-group">
+      <label>
+        <input type="checkbox" name="termsAccepted" [(ngModel)]="student.termsAccepted" required />
+        I accept the Terms & Conditions
+      </label>
+      @if (!student.termsAccepted && studentForm.submitted) {
+        <p class="error">Please accept the Terms and Conditions.</p>
+      }
+    </div>
+
+    <div class="actions">
+      <button type="submit" [disabled]="!studentForm.valid">Submit</button>
+      <button type="button" class="secondary" (click)="resetForm(studentForm)">Reset</button>
+    </div>
+  </form>
+
+  @if (submittedStudent) {
+    <div class="summary-card">
+      <h3>Submitted Student Details</h3>
+      <p><strong>Name:</strong> {{ submittedStudent.fullName }}</p>
+      <p><strong>Email:</strong> {{ submittedStudent.email }}</p>
+      <p><strong>Mobile:</strong> {{ submittedStudent.mobile }}</p>
+      <p><strong>Age:</strong> {{ submittedStudent.age }}</p>
+      <p><strong>Gender:</strong> {{ submittedStudent.gender }}</p>
+      <p><strong>Course:</strong> {{ submittedStudent.course }}</p>
+      <p><strong>Address:</strong> {{ submittedStudent.address }}</p>
+    </div>
+  }
+</section>
