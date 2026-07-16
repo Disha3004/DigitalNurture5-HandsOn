@@ -1,30 +1,64 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { catchError, map, Observable, retry, throwError } from 'rxjs';
 import { Course } from '../models/course.model';
 
-// Singleton Service: Angular creates one shared instance for the app when
-// `providedIn: 'root'` is used.
 @Injectable({
   providedIn: 'root',
 })
 export class CourseService {
-  private readonly courses: Course[] = [
-    { id: 101, name: 'Angular Fundamentals', code: 'ANG101', credits: 3, gradeStatus: 'passed' },
-    { id: 102, name: 'React Mastery', code: 'REA102', credits: 4, gradeStatus: 'pending' },
-    { id: 103, name: 'Spring Boot Essentials', code: 'SPR103', credits: 3, gradeStatus: 'passed' },
-    { id: 104, name: 'Java for Professionals', code: 'JAV104', credits: 4, gradeStatus: 'failed' },
-    { id: 105, name: 'Python Data Science', code: 'PYT105', credits: 3, gradeStatus: 'pending' },
-    { id: 106, name: 'SQL for Beginners', code: 'SQL106', credits: 2, gradeStatus: 'passed' },
-  ];
+  private readonly apiUrl = 'http://localhost:3000/courses';
 
-  getCourses(): Course[] {
-    return this.courses;
+  constructor(private readonly http: HttpClient) {}
+
+  getCourses(): Observable<Course[]> {
+    return this.http.get<Course[]>(this.apiUrl).pipe(
+      retry(2),
+      map((courses) => courses || []),
+      catchError((error) => {
+        console.error('Failed to load courses', error);
+        return throwError(() => new Error('Unable to load courses.'));
+      })
+    );
   }
 
-  getCourseById(id: number): Course | undefined {
-    return this.courses.find((course) => course.id === id);
+  getCourseById(id: number): Observable<Course | undefined> {
+    return this.http.get<Course>(`${this.apiUrl}/${id}`).pipe(
+      retry(2),
+      catchError((error) => {
+        console.error('Failed to load course', error);
+        return throwError(() => new Error('Unable to load course.'));
+      })
+    );
   }
 
-  addCourse(course: Course): void {
-    this.courses.push(course);
+  addCourse(course: Course): Observable<Course> {
+    return this.http.post<Course>(this.apiUrl, course).pipe(
+      retry(2),
+      catchError((error) => {
+        console.error('Failed to add course', error);
+        return throwError(() => new Error('Unable to add course.'));
+      })
+    );
+  }
+
+  updateCourse(course: Course): Observable<Course> {
+    return this.http.put<Course>(`${this.apiUrl}/${course.id}`, course).pipe(
+      retry(2),
+      catchError((error) => {
+        console.error('Failed to update course', error);
+        return throwError(() => new Error('Unable to update course.'));
+      })
+    );
+  }
+
+  deleteCourse(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}`).pipe(
+      retry(2),
+      catchError((error) => {
+        console.error('Failed to delete course', error);
+        return throwError(() => new Error('Unable to delete course.'));
+      })
+    );
   }
 }

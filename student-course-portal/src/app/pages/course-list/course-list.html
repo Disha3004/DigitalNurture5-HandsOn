@@ -3,6 +3,7 @@
 
   <div class="filters">
     <input type="text" placeholder="Search courses by name or code" [(ngModel)]="searchText" />
+    <button type="button" (click)="search()">Search</button>
 
     <select [(ngModel)]="selectedCategory">
       @for (status of uniqueStatuses; track status) {
@@ -23,7 +24,9 @@
 
   <div class="course-grid">
     @for (course of filteredCourses; track course.id) {
-      <app-course-card [course]="course"></app-course-card>
+      <a class="course-link" [routerLink]="['/courses', course.id]">
+        <app-course-card [course]="course"></app-course-card>
+      </a>
     }
   </div>
 </section>

@@ -15,10 +15,18 @@
 }
 
 .filters input,
-.filters select {
+.filters select,
+.filters button {
   padding: 0.7rem;
   border: 1px solid #cbd5e1;
   border-radius: 0.5rem;
+}
+
+.filters button {
+  background: #2563eb;
+  color: white;
+  border: none;
+  cursor: pointer;
 }
 
 .checkbox-row {
@@ -41,18 +49,15 @@
   margin-top: 1rem;
 }
 
+.course-link {
+  text-decoration: none;
+  color: inherit;
+}
+
 .course-card {
   padding: 1rem;
   border-radius: 0.75rem;
   border: 1px solid #e2e8f0;
-}
-
-.course-card.available {
-  background: #ecfdf3;
-}
-
-.course-card.unavailable {
-  background: #f3f4f6;
 }
 
 .card-header {

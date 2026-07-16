@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
+import { map, Observable, of, switchMap } from 'rxjs';
 import { Course } from '../models/course.model';
 import { CourseService } from './course.service';
 
-// Dependency Injection: Angular injects the shared CourseService into this
-// service so it can resolve course details for enrolled IDs.
 @Injectable({
   providedIn: 'root',
 })
@@ -26,9 +25,9 @@ export class EnrollmentService {
     return this.enrolledCourseIds.includes(courseId);
   }
 
-  getEnrolledCourses(): Course[] {
-    return this.enrolledCourseIds
-      .map((id) => this.courseService.getCourseById(id))
-      .filter((course): course is Course => Boolean(course));
+  getEnrolledCourses(): Observable<Course[]> {
+    return of(this.enrolledCourseIds).pipe(
+      switchMap((ids) => this.courseService.getCourses().pipe(map((courses) => courses.filter((course) => ids.includes(course.id)))))
+    );
   }
 }

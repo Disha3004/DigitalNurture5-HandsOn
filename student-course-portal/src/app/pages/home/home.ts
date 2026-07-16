@@ -1,12 +1,13 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { RouterLink } from '@angular/router';
 import { CourseSummaryWidget } from '../../components/course-summary-widget/course-summary-widget';
 import { NotificationComponent } from '../../components/notification/notification';
 import { CourseService } from '../../services/course.service';
 
 @Component({
   selector: 'app-home',
-  imports: [FormsModule, CourseSummaryWidget, NotificationComponent],
+  imports: [FormsModule, RouterLink, CourseSummaryWidget, NotificationComponent],
   templateUrl: './home.html',
   styleUrl: './home.css',
 })
@@ -16,12 +17,12 @@ export class Home implements OnInit, OnDestroy {
   protected courseCount = 0;
   protected isEnrolled = true;
 
-  constructor(private readonly courseService: CourseService) {
-    this.courseCount = this.courseService.getCourses().length;
-  }
+  constructor(private readonly courseService: CourseService) {}
 
   ngOnInit(): void {
-    console.log('HomeComponent Initialized');
+    this.courseService.getCourses().subscribe((courses) => {
+      this.courseCount = courses.length;
+    });
   }
 
   ngOnDestroy(): void {

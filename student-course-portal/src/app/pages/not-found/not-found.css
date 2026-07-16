@@ -1,0 +1,13 @@
+.page-card {
+  max-width: 700px;
+  margin: 2rem auto;
+  padding: 2rem;
+  border-radius: 1rem;
+  background: white;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+}
+
+.back-link {
+  color: #2563eb;
+  font-weight: 600;
+}

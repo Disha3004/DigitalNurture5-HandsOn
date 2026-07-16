@@ -1,0 +1,13 @@
+<section class="page-card">
+  @if (course) {
+    <h2>{{ course.name }}</h2>
+    <p><strong>Code:</strong> {{ course.code }}</p>
+    <p><strong>Credits:</strong> {{ course.credits }}</p>
+    <p><strong>Status:</strong> {{ course.gradeStatus }}</p>
+    <a routerLink="/courses" class="back-link">Back to courses</a>
+  } @else {
+    <h2>Course detail</h2>
+    <p>{{ errorMessage }}</p>
+    <a routerLink="/courses" class="back-link">Back to courses</a>
+  }
+</section>

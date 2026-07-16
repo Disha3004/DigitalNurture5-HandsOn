@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { EnrollmentService } from '../../services/enrollment.service';
+import { Course } from '../../models/course.model';
 
 @Component({
   selector: 'app-student-profile',
@@ -7,7 +8,7 @@ import { EnrollmentService } from '../../services/enrollment.service';
   templateUrl: './student-profile.html',
   styleUrl: './student-profile.css',
 })
-export class StudentProfile {
+export class StudentProfile implements OnInit {
   protected readonly student = {
     name: 'Aarav Sharma',
     email: 'aarav@example.com',
@@ -15,9 +16,13 @@ export class StudentProfile {
     semester: '6th Semester',
   };
 
+  protected enrolledCourses: Course[] = [];
+
   constructor(private readonly enrollmentService: EnrollmentService) {}
 
-  protected get enrolledCourses() {
-    return this.enrollmentService.getEnrolledCourses();
+  ngOnInit(): void {
+    this.enrollmentService.getEnrolledCourses().subscribe((courses) => {
+      this.enrolledCourses = courses;
+    });
   }
 }

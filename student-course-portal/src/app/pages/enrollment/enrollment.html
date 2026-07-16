@@ -1,0 +1,25 @@
+<section class="page-card">
+  <h2>Enrollment Module</h2>
+  <p>Complete your enrollment request here.</p>
+
+  <form [formGroup]="enrollForm" (ngSubmit)="onSubmit()">
+    <label>
+      Student Name
+      <input formControlName="studentName" />
+    </label>
+
+    <label>
+      Course Code
+      <input formControlName="courseCode" />
+    </label>
+
+    <label>
+      Notes
+      <textarea formControlName="notes"></textarea>
+    </label>
+
+    <button type="submit">Submit Enrollment</button>
+  </form>
+
+  <a routerLink="/courses" class="back-link">Back to courses</a>
+</section>
