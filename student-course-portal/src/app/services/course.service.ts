@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { catchError, map, Observable, retry, throwError } from 'rxjs';
 import { Course } from '../models/course.model';
 
+// Singleton Service: Angular creates one shared instance for the app because
+// this service is provided at the root level with providedIn: 'root'.
 @Injectable({
   providedIn: 'root',
 })

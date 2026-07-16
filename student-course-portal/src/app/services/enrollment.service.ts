@@ -3,6 +3,8 @@ import { map, Observable, of, switchMap } from 'rxjs';
 import { Course } from '../models/course.model';
 import { CourseService } from './course.service';
 
+// Dependency Injection: Angular injects the shared CourseService into this
+// service to resolve enrolled course ids into real Course objects.
 @Injectable({
   providedIn: 'root',
 })
