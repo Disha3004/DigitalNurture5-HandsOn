@@ -23,7 +23,7 @@
   </div>
 
   <div class="course-grid">
-    @for (course of filteredCourses; track course.id) {
+    @for (course of (courses$ | async) ?? []; track course.id) {
       <a class="course-link" [routerLink]="['/courses', course.id]">
         <app-course-card [course]="course"></app-course-card>
       </a>

@@ -21,9 +21,9 @@
 
   <div class="enrolled-section">
     <h3>Enrolled Courses</h3>
-    @if (enrolledCourses.length > 0) {
+    @if ((enrolledCourses$ | async)?.length) {
       <ul>
-        @for (course of enrolledCourses; track course.id) {
+        @for (course of (enrolledCourses$ | async) ?? []; track course.id) {
           <li>{{ course.name }} ({{ course.code }})</li>
         }
       </ul>

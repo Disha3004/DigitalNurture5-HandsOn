@@ -1,9 +1,14 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 import { CourseSummaryWidget } from '../../components/course-summary-widget/course-summary-widget';
 import { NotificationComponent } from '../../components/notification/notification';
-import { CourseService } from '../../services/course.service';
+import { Course } from '../../models/course.model';
+import { loadCourses } from '../../store/course.actions';
+import { selectAllCourses, selectCourseLoading } from '../../store/course.selectors';
+import { AppState } from '../../store/course.state';
 
 @Component({
   selector: 'app-home',
@@ -16,11 +21,17 @@ export class Home implements OnInit, OnDestroy {
   protected courseName = 'Angular';
   protected courseCount = 0;
   protected isEnrolled = true;
+  protected readonly courses$: Observable<Course[]>;
+  protected readonly loading$: Observable<boolean>;
 
-  constructor(private readonly courseService: CourseService) {}
+  constructor(private readonly store: Store<AppState>) {
+    this.courses$ = this.store.select(selectAllCourses);
+    this.loading$ = this.store.select(selectCourseLoading);
+  }
 
   ngOnInit(): void {
-    this.courseService.getCourses().subscribe((courses) => {
+    this.store.dispatch(loadCourses());
+    this.courses$.subscribe((courses) => {
       this.courseCount = courses.length;
     });
   }

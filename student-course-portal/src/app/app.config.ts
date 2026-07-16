@@ -1,16 +1,21 @@
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { ApplicationConfig, provideBrowserGlobalErrorListeners } from '@angular/core';
 import { provideRouter } from '@angular/router';
+import { provideEffects } from '@ngrx/effects';
+import { provideStore } from '@ngrx/store';
+import { provideStoreDevtools } from '@ngrx/store-devtools';
 
 import { routes } from './app.routes';
-import { AuthInterceptor } from './services/auth.interceptor';
-import { ErrorInterceptor } from './services/error.interceptor';
-import { LoadingInterceptor } from './services/loading.interceptor';
+import { CourseEffects } from './store/course.effects';
+import { reducers } from './store/course.state';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideRouter(routes),
+    provideStore(reducers),
+    provideEffects([CourseEffects]),
+    provideStoreDevtools({ maxAge: 25, logOnly: false }),
     provideHttpClient(
       withInterceptors([
         (req, next) => {
@@ -22,7 +27,6 @@ export const appConfig: ApplicationConfig = {
           });
           return next(authReq);
         },
-        (req, next) => next(req),
       ])
     ),
   ],

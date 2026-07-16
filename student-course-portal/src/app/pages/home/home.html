@@ -19,4 +19,9 @@
     <button type="button" (click)="enrollNow()" [disabled]="isEnrolled">Enroll Now</button>
     <a routerLink="/courses" class="nav-link">Browse Courses</a>
   </div>
+
+  <div class="store-status">
+    <p>Store Courses: {{ (courses$ | async)?.length ?? 0 }}</p>
+    <p>Loading: {{ (loading$ | async) ? 'Yes' : 'No' }}</p>
+  </div>
 </section>

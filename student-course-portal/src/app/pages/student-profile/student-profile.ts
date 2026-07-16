@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { EnrollmentService } from '../../services/enrollment.service';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 import { Course } from '../../models/course.model';
+import { selectAllCourses } from '../../store/course.selectors';
+import { AppState } from '../../store/course.state';
 
 @Component({
   selector: 'app-student-profile',
@@ -16,13 +19,13 @@ export class StudentProfile implements OnInit {
     semester: '6th Semester',
   };
 
-  protected enrolledCourses: Course[] = [];
+  protected enrolledCourses$: Observable<Course[]>;
 
-  constructor(private readonly enrollmentService: EnrollmentService) {}
+  constructor(private readonly store: Store<AppState>) {
+    this.enrolledCourses$ = this.store.select(selectAllCourses);
+  }
 
   ngOnInit(): void {
-    this.enrollmentService.getEnrolledCourses().subscribe((courses) => {
-      this.enrolledCourses = courses;
-    });
+    this.enrolledCourses$.subscribe();
   }
 }
