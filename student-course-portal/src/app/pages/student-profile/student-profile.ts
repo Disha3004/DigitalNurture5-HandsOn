@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { EnrollmentService } from '../../services/enrollment.service';
 
 @Component({
   selector: 'app-student-profile',
@@ -13,4 +14,10 @@ export class StudentProfile {
     major: 'Computer Science',
     semester: '6th Semester',
   };
+
+  constructor(private readonly enrollmentService: EnrollmentService) {}
+
+  protected get enrolledCourses() {
+    return this.enrollmentService.getEnrolledCourses();
+  }
 }

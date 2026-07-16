@@ -1,0 +1,17 @@
+.notification-card {
+  margin: 1.25rem 0;
+  padding: 1rem;
+  border-radius: 0.8rem;
+  background: #fef3c7;
+  border: 1px solid #fde68a;
+}
+
+.notification-card h3 {
+  margin-top: 0;
+  color: #92400e;
+}
+
+.notification-card p {
+  margin-bottom: 0;
+  color: #78350f;
+}

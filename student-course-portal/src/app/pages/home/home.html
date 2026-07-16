@@ -9,6 +9,9 @@
     <p>Enrollment Status: {{ isEnrolled ? 'Enrolled' : 'Not Enrolled' }}</p>
   </div>
 
+  <app-course-summary-widget></app-course-summary-widget>
+  <app-notification></app-notification>
+
   <div class="binding-demo">
     <label for="student-name">Student Name</label>
     <input id="student-name" type="text" [(ngModel)]="studentName" />

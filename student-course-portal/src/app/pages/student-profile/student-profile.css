@@ -16,3 +16,11 @@
 .profile-grid p {
   margin: 0.25rem 0;
 }
+
+.enrolled-section {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  border-radius: 0.8rem;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+}

@@ -2,18 +2,17 @@
   <h2>Course List</h2>
 
   <div class="filters">
-    <input type="text" placeholder="Search courses" [(ngModel)]="searchText" />
+    <input type="text" placeholder="Search courses by name or code" [(ngModel)]="searchText" />
 
     <select [(ngModel)]="selectedCategory">
-      <option value="All">All</option>
-      <option value="Programming">Programming</option>
-      <option value="Web Development">Web Development</option>
-      <option value="Database">Database</option>
+      @for (status of uniqueStatuses; track status) {
+        <option [value]="status">{{ status === 'All' ? 'All Statuses' : status | titlecase }}</option>
+      }
     </select>
 
     <label class="checkbox-row">
       <input type="checkbox" [(ngModel)]="showAvailableOnly" />
-      <span>Show Available Courses Only</span>
+      <span>Show only active courses</span>
     </label>
   </div>
 
@@ -24,30 +23,7 @@
 
   <div class="course-grid">
     @for (course of filteredCourses; track course.id) {
-      <article
-        class="course-card"
-        [ngClass]="course.isAvailable ? 'available' : 'unavailable'"
-      >
-        <div class="card-header">
-          <h3>{{ course.title | titlecase }}</h3>
-          <span class="badge" [ngStyle]="{ color: course.rating > 4.5 ? 'blue' : 'orange' }">
-            Rating: {{ course.rating | number: '1.1-1' }}
-          </span>
-        </div>
-
-        <p><strong>Instructor:</strong> {{ course.instructor | uppercase }}</p>
-        <p><strong>Duration:</strong> {{ course.duration | lowercase }}</p>
-        <p><strong>Price:</strong> {{ course.price | currency: 'INR' }}</p>
-        <p><strong>Category:</strong> {{ course.category }}</p>
-        <p><strong>Start Date:</strong> {{ course.startDate | date: 'mediumDate' }}</p>
-        <p><strong>Completion:</strong> {{ 0.82 | percent }}</p>
-
-        @if (course.isAvailable) {
-          <p class="status available-text">Available</p>
-        } @else {
-          <p class="status closed-text">Closed</p>
-        }
-      </article>
+      <app-course-card [course]="course"></app-course-card>
     }
   </div>
 </section>
